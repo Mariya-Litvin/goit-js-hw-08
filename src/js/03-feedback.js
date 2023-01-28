@@ -32,6 +32,11 @@ const LOCAL_STORAGE_KEY = 'feedback-form-state';
 
 setInputOnForm();
 
+// - Останавливаем поведение по умолчанию
+// - Если не все поля заполнены - выводим сообщение
+//  - Убираем сообщение из хранилища
+//  - Очищаем форму
+
 function onFormSubmit(event) {
   event.preventDefault();
 
@@ -47,6 +52,9 @@ function onFormSubmit(event) {
   localStorage.removeItem(LOCAL_STORAGE_KEY);
 }
 
+//  - Получаем значение полей
+//  - Сохраняем их в хранилище
+
 function onFormInput(event) {
   const formData = {
     email: form.elements.email.value,
@@ -55,6 +63,9 @@ function onFormInput(event) {
 
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
 }
+
+//  - Получаем значение из хранилища
+//  - Если там что-то было, обновляем DOM
 
 function setInputOnForm() {
   const savedMessage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
